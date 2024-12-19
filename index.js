@@ -113,7 +113,7 @@ function readStreamData () {
 readStreamData()
 */
 /*
-//W
+//-W
  const fs = require('fs')
  const path = require('path')
  const carsFilePath = path.join(__dirname, 'cars.json')
@@ -126,4 +126,57 @@ function writeStreamData (data) {
 }
 
 writeStreamData({id: 3, model: "jentra", price: 15000} )
+*/
+
+//-D
+/*
+const fs = require('fs')
+const path = require('path')
+
+const filePath = path.join(__dirname, 'cars.json')
+
+function deleteStringData () {
+if(!fs.existsSync(filePath)){
+    console.log("file mavjut emas ")
+    return;
+}
+fs.unlink(filePath, err => {
+    if(err) {
+        console.log("Fayilni ochrishda xatolig yuz berdi", err)
+    } else {
+        console.log("Fayil muaffaqiyatliy ochirildi")
+    }
+})
+}
+deleteStringData()
+*/
+
+//-T
+/*
+const fs = require('fs')
+const path = require('path');
+
+
+const filePath = path.join(__dirname, 'index.txt')
+
+function readStreamData() {
+    if(!fs.existsSync(filePath)) {
+     console.log("Fayil mavjut emas ")
+     return;
+    }
+
+    const readStream = fs.createReadStream(filePath,{ encoding: 'utf-8'})
+    console.log("Fayildagi molumot oqilmadi")
+
+    readStream.on('data', chunk => {
+        console.log(chunk)
+    })
+    readStream.on('end', () => {
+        console.log("Malumot toliq oqildi")
+    })
+    readStream.on('error', err => {
+        console.log("Fayil oqishda xatolig yuz berdi ", err)
+    })
+}
+readStreamData()
 */
